@@ -1,0 +1,93 @@
+<isinclude template="/components/modules" sf-toolkit="off" />
+
+<div class="header-menu-container">
+    <span class="header-menu-close js-close-menu">&times;</span>
+
+    <div class="header-menu-inner">
+        <div class="js-menu-container">
+            <div class="header-menu-item">
+                <isif condition="${!empty(pdict.categories)}">
+                    <ul class="first-level-list">
+                        <div class="menu-back-wrap">
+                            <span>Menu</span>
+                        </div>
+                        <div class="h-scroll first-level-list-inner">
+                            <iscomment> STATUS1 </iscomment>
+                            <isloop items="${pdict.categories}" var="topLevelCategory" status="status1">
+                                <isif condition="${topLevelCategory.isTopLevel && topLevelCategory.custom.showInMenu}" >
+                                    <li class="list-item first-level-list-item js-top-level-category ${topLevelCategory.id === 'womens' ? 'womens' : ''}">
+                                        <a class="link first-level-list-link js-open-next-list" href="${topLevelCategory.url}" id="${topLevelCategory.id}" >
+                                            ${topLevelCategory.name}
+                                            <isif condition="${!empty(topLevelCategory.subCategories)}">
+                                                <i class="fa fa-chevron-right"></i>
+                                            </isif>
+                                        </a>
+
+                                        <isif condition="${topLevelCategory.subCategories}">
+                                            <ul class="list second-level-list">
+                                                <div class="menu-back-wrap">
+                                                    <span class="menu-back">
+                                                        <i class="fa fa-chevron-left js-open-prev-list"></i>
+                                                        <a class="menu-back-link" href="${topLevelCategory.url}">${topLevelCategory.name}</a>
+                                                    </span>
+                                                </div>
+
+                                                <div class="h-scroll second-level-list-inner">
+                                                    <iscomment> STATUS2 </iscomment>
+                                                    <isif condition="${topLevelCategory.id !== 'womens'}">
+                                                        <div class="content-left">
+                                                            <iscontentasset aid="content-left-side" />
+                                                        </div>
+                                                    </isif>
+
+                                                    <isloop items="${topLevelCategory.subCategories}" var="subCategory" status="status2">
+                                                        <li class="list-item second-level-list-item">
+                                                            <a class="link second-level-list-link js-open-next-list" href="${subCategory.url}" id="${subCategory.id}">
+                                                                ${subCategory.name}
+                                                                <isif condition="${!empty(subCategory.subCategories)}">
+                                                                    <i class="fa fa-chevron-right"></i>
+                                                                </isif>
+                                                            </a>
+
+                                                            <isif condition="${subCategory.subCategories}">
+                                                                <ul class="list third-level-list">
+                                                                    <div class="menu-back-wrap">
+                                                                        <span class="menu-back">
+                                                                            <i class="fa fa-chevron-left js-open-prev-list"></i>
+                                                                            <a class="menu-back-link" href="${subCategory.url}">${subCategory.name}</a>
+                                                                        </span>
+                                                                    </div>
+
+                                                                    <div class="h-scroll list-inner">
+                                                                        <iscomment> STATUS3 </iscomment>
+                                                                        <isloop items="${subCategory.subCategories}" var="subSubCategory" status="status3">
+                                                                            <li class="list-item third-level-list-item">
+                                                                                <a class="link third-level-list-link js-open-next-list" href="${subSubCategory.url}" id="${subSubCategory.id}">
+                                                                                    ${subSubCategory.name}
+                                                                                    <isif condition="${!empty(subSubCategory.subCategories)}">
+                                                                                        <i class="fa fa-chevron-right"></i>
+                                                                                    </isif>
+                                                                                </a>
+                                                                            </li>
+                                                                        </isloop>
+                                                                    </div>
+                                                                </ul>
+                                                            </isif>
+                                                        </li>
+                                                    </isloop>
+                                                </div>
+                                                <div class="content-right">
+                                                    <isslot id="cat-landing-slotheader" context="category" description="Category Heading Banner" context-object="${dw.catalog.CatalogMgr.getCategory(topLevelCategory.id)}" />
+                                                </div>
+                                            </ul>
+                                        </isif>
+                                    </li>
+                                </isif>
+                            </isloop>
+                        </div>
+                    </ul>
+                </isif>
+            </div>
+        </div>
+    </div>
+</div>

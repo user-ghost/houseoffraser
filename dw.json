@@ -1,0 +1,11 @@
+{
+    "username": "yuri.b@fisha.co.il",
+    "password": "Enter4!",
+    "hostname": "bfnc-003.sandbox.us01.dx.commercecloud.salesforce.com",
+    "version": "version1",
+    "code-version": "version2",
+    "root": ".",
+    "exclude": [
+        "**/node_modules/**"
+    ]
+}
